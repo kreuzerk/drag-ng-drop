@@ -1,12 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {TeamCardComponent} from './team/team-card.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TeamCardComponent
   ],
   imports: [
     BrowserModule,
@@ -15,4 +17,5 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

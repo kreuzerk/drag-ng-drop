@@ -1,15 +1,33 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {League, Team} from './team/team.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  items = ['Zero', 'One', 'Two', 'Three'];
+export class AppComponent implements OnInit {
+  public teams: Team[] = [];
+
+  ngOnInit(): void {
+    this.teams.push(this.createTem(League.LA_LIGA, 'Real Madrid', 'Best club ever'));
+    this.teams.push(this.createTem(League.LA_LIGA, 'FC Barcelona', 'Worst club ever'));
+    this.teams.push(this.createTem(League.LA_LIGA, 'Atletico Madrid', 'Enemies'));
+    this.teams.push(this.createTem(League.LA_LIGA, 'Getafe', 'Small club from Madrid'));
+    this.teams.push(this.createTem(League.PREMIERLEAGUE, 'Manchester United', 'Club with a huge history'));
+    this.teams.push(this.createTem(League.PREMIERLEAGUE, 'Liverpool', 'Club with a awesome entry song'));
+    this.teams.push(this.createTem(League.PREMIERLEAGUE, 'Man City', 'Current Champions of England'));
+    this.teams.push(this.createTem(League.PREMIERLEAGUE, 'Leicester', 'Surprising Champions'));
+  }
+
+  private createTem(league: League, teamName: string, description: string): Team {
+    return {league, name: teamName, description};
+  }
 
   onDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    console.log('Event', event);
+    moveItemInArray(this.teams, event.previousIndex, event.currentIndex);
   }
+
 }

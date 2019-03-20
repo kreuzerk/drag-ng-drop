@@ -1,3 +1,5 @@
-<div cdkDropList (cdkDropListDropped)="onDrop($event)">
-  <div *ngFor="let item of items" cdkDrag>{{item}}</div>
+<div class="container-fluid" cdkDropList (cdkDropListDropped)="onDrop($event)">
+  <div class="row">
+    <app-card *ngFor="let team of teams" cdkDrag [team]="team"></app-card>
+  </div>
 </div>

@@ -1,0 +1,13 @@
+<div class="container-fluid" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
+  <div class="row">
+    <app-card *ngFor="let team of teams" cdkDrag [team]="team"></app-card>
+  </div>
+</div>
+
+<div class="container-fluid" cdkDropList (cdkDropListDropped)="onDrop($event)">
+  <ul class="row">
+    <li>
+      <app-card *ngFor="let team of teams" cdkDrag [team]="team"></app-card>
+    </li>
+  </ul>
+</div>

@@ -7,21 +7,29 @@ import {TeamCardComponent} from './team/team-card.component';
 import {RouterModule} from '@angular/router';
 import {TestOneComponent} from './testOne/test.one.component';
 import {SortGridComponent} from './sort-grid/sort-grid.component';
+import {SortableJSComponent} from './sortableJS/sortableJS.component';
+import {DragulaComponent} from './dragula/dragula.component';
+import {DragulaModule} from 'ng2-dragula';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamCardComponent,
     TestOneComponent,
-    SortGridComponent
+    SortGridComponent,
+    SortableJSComponent,
+    DragulaComponent
   ],
   imports: [
     BrowserModule,
     DragDropModule,
+    DragulaModule.forRoot(),
     RouterModule.forRoot([
       {path: 'testOne', component: TestOneComponent},
       {path: 'sortGrid', component: SortGridComponent},
-      {path: '', redirectTo: 'sortGrid', pathMatch: 'full'}
+      {path: 'appSortableJS', component: SortableJSComponent},
+      {path: 'dragula', component: DragulaComponent},
+      {path: '', redirectTo: 'dragula', pathMatch: 'full'}
     ])
   ],
   providers: [],

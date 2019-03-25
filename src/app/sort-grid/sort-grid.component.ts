@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {CdkDrag, CdkDragEnter, CdkDropList, CdkDropListContainer, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
+import {AfterViewInit, Component} from '@angular/core';
+import {CdkDragEnter, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-sort-grid',
-  templateUrl: './sort-grid.component.html',
-  styleUrls: ['./sort-grid.component.css']
+  templateUrl: './sort-grid.component.html'
 })
 export class SortGridComponent implements AfterViewInit {
 

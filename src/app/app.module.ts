@@ -10,6 +10,7 @@ import {SortGridComponent} from './sort-grid/sort-grid.component';
 import {SortableJSComponent} from './sortableJS/sortableJS.component';
 import {DragulaComponent} from './dragula/dragula.component';
 import {DragulaModule} from 'ng2-dragula';
+import {PrimengSortgridComponent} from './primeng/primeng.sortgrid.component';
 
 @NgModule({
   declarations: [
@@ -18,17 +19,19 @@ import {DragulaModule} from 'ng2-dragula';
     TestOneComponent,
     SortGridComponent,
     SortableJSComponent,
-    DragulaComponent
+    DragulaComponent,
+    PrimengSortgridComponent
   ],
   imports: [
     BrowserModule,
     DragDropModule,
     DragulaModule.forRoot(),
     RouterModule.forRoot([
-      {path: 'testOne', component: TestOneComponent},
-      {path: 'sortGrid', component: SortGridComponent},
-      {path: 'appSortableJS', component: SortableJSComponent},
-      {path: 'dragula', component: DragulaComponent},
+      {path: 'cdkTest', component: TestOneComponent},
+      {path: 'cdkSortGrid', component: SortGridComponent},
+      {path: 'sortableJSSortGrid', component: SortableJSComponent},
+      {path: 'dragulaSortGrid', component: DragulaComponent},
+      {path: 'primengSortGrid', component: PrimengSortgridComponent},
       {path: '', redirectTo: 'dragula', pathMatch: 'full'}
     ])
   ],

@@ -1,1 +1,11 @@
-<h1>Hallo</h1>
+<h1>Primeng</h1>
+
+<div class="example-container">
+  <div *ngFor="let item of items; let i = index">
+    <div pDraggable pDroppable
+         (onDragStart)="dragStart($event, i)"
+         (onDragEnter)="dragEnter($event, i)">
+      <div class="example-box">{{item}}</div>
+    </div>
+  </div>
+</div>

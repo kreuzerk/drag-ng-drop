@@ -11,6 +11,7 @@ import {SortableJSComponent} from './sortableJS/sortableJS.component';
 import {DragulaComponent} from './dragula/dragula.component';
 import {DragulaModule} from 'ng2-dragula';
 import {PrimengSortgridComponent} from './primeng/primeng.sortgrid.component';
+import {DragDropModule as PrimengDragAndDrop} from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {PrimengSortgridComponent} from './primeng/primeng.sortgrid.component';
   imports: [
     BrowserModule,
     DragDropModule,
+    PrimengDragAndDrop,
     DragulaModule.forRoot(),
     RouterModule.forRoot([
       {path: 'cdkTest', component: TestOneComponent},

@@ -15,6 +15,7 @@ import {DragDropModule as PrimengDragAndDrop} from 'primeng/dragdrop';
 import {SortableListDemoComponent} from './sortable-list/sortable-list.demo.component';
 import {SortableListDirective} from './sortable-list/sortable-list.directive';
 import {SortableListItemDirective} from './sortable-list/sortable-list-item.directive';
+import {SortableListComponent} from './sortable-list/sortable-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {SortableListItemDirective} from './sortable-list/sortable-list-item.dire
     PrimengSortgridComponent,
     SortableListDemoComponent,
     SortableListDirective,
-    SortableListItemDirective
+    SortableListItemDirective,
+    SortableListComponent
   ],
   imports: [
     BrowserModule,

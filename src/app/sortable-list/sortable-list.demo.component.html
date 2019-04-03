@@ -1,6 +1,16 @@
+<!--
 <h1>Sortable list demo</h1>
 <div class="example-container">
   <div *ngFor="let item of items" sortableListItem class="example-box">
     {{item}}
   </div>
 </div>
+-->
+
+<ng-template #draggable let-club>
+  <div class="example-box" style="font-size: 20px">
+  {{ club.name }}
+  </div>
+</ng-template>
+
+<sortable-list [dragableItem]="draggable" [items]="clubs"></sortable-list>

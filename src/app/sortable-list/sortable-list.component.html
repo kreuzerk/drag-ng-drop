@@ -1,0 +1,13 @@
+<div class="example-container">
+  <div
+    *ngFor="let item of items; let i = index"
+    pDraggable pDroppable
+    (onDragStart)="dragStart($event, i)"
+    (onDragEnter)="dragEnter($event, i)">
+    <ng-container
+      [ngTemplateOutlet]="dragableItem"
+      [ngTemplateOutletContext]="{$implicit:item}"
+    ></ng-container>
+  </div>
+</div>
+

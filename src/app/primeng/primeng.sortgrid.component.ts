@@ -21,23 +21,17 @@ export class PrimengSortgridComponent implements OnInit {
   }
 
   dragEnter(event, hoverIndex: number): void {
-    if (hoverIndex === this.dragIndex) {
-      return;
-    }
-
     this.insertItem(hoverIndex, hoverIndex < this.placeHolderPosition);
     this.removeItem(this.placeHolderPosition, hoverIndex > this.placeHolderPosition);
     this.placeHolderPosition = hoverIndex;
   }
 
   private removeItem(index: number, after: boolean) {
-    console.log('Going to remove item at', index);
     const position = after ? index : index + 1;
     this.items.splice(position, 1);
   }
 
   private insertItem(index: number, before) {
-    console.log('Insert item at', index);
     const position = before ? index : index + 1;
     this.items.splice(position, 0, this.dragItem);
   }

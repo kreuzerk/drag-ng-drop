@@ -24,7 +24,7 @@ export class SortGridComponent implements AfterViewInit {
   enter = (dragEnter: CdkDragEnter) => {
     const containerElement = dragEnter.container.element.nativeElement;
 
-    this.sourceIndex = __indexOf(containerElement.parentNode.children, dragEnter.item.dropContainer.element.nativeElement);
+    this.sourceIndex = __indexOf(containerElement.parentNode.children, dragEnter.item.dropContainer.element.nativeElement) + 1;
     this.targetIndex = __indexOf(containerElement.parentNode.children, containerElement);
 
     console.log('Enterd', this.targetIndex);

@@ -12,6 +12,9 @@ import {DragulaComponent} from './dragula/dragula.component';
 import {DragulaModule} from 'ng2-dragula';
 import {PrimengSortgridComponent} from './primeng/primeng.sortgrid.component';
 import {DragDropModule as PrimengDragAndDrop} from 'primeng/dragdrop';
+import {SortableListDemoComponent} from './sortable-list/sortable-list.demo.component';
+import {SortableListDirective} from './sortable-list/sortable-list.directive';
+import {SortableListItemDirective} from './sortable-list/sortable-list-item.directive';
 
 @NgModule({
   declarations: [
@@ -20,8 +23,12 @@ import {DragDropModule as PrimengDragAndDrop} from 'primeng/dragdrop';
     TestOneComponent,
     SortGridComponent,
     SortableJSComponent,
+    SortableListDemoComponent,
     DragulaComponent,
-    PrimengSortgridComponent
+    PrimengSortgridComponent,
+    SortableListDemoComponent,
+    SortableListDirective,
+    SortableListItemDirective
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,8 @@ import {DragDropModule as PrimengDragAndDrop} from 'primeng/dragdrop';
       {path: 'sortableJSSortGrid', component: SortableJSComponent},
       {path: 'dragulaSortGrid', component: DragulaComponent},
       {path: 'primengSortGrid', component: PrimengSortgridComponent},
-      {path: '', redirectTo: 'dragula', pathMatch: 'full'}
+      {path: 'sortableList', component: SortableListDemoComponent},
+      {path: '', redirectTo: 'sortableList', pathMatch: 'full'}
     ])
   ],
   providers: [],

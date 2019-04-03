@@ -1,0 +1,8 @@
+<h1>Sortable list demo</h1>
+<div class="example-container" [sortableList]="items">
+  <div *ngFor="let item of items">
+    <div>
+      <div sortableListItem class="example-box">{{item}}</div>
+    </div>
+  </div>
+</div>

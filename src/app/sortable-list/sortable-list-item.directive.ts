@@ -29,13 +29,19 @@ export class SortableListItemDirective implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.pDraggable.ngAfterViewInit();
     this.pDraggable.onDragStart.subscribe((dragEvent: DragEvent) => this.dragStart(dragEvent));
-    this.pDroppable.onDragEnter.subscribe(e => console.log('Drag enter', e));
+    this.pDroppable.onDragEnter.subscribe((dropEnterEvent: DragEvent) => this.dropEnter(dropEnterEvent));
   }
 
   private dragStart(dragEvent: DragEvent): void {
     const dragElement: any = dragEvent.target;
     const allElements = dragElement.parentNode.children;
-    console.log(this.findIndex(allElements, dragElement));
+    console.log('DragIndex', this.findIndex(allElements, dragElement));
+  }
+
+  private dropEnter(dropEnterEvent: DragEvent): void {
+    const dropToElement: any = dropEnterEvent.target;
+    const allElements = dropToElement.parentNode.children;
+    console.log('DropIndex', this.findIndex(allElements, dropToElement));
   }
 
   private findIndex(collection, node) {

@@ -9,14 +9,6 @@ export class SortableListItemDirective implements OnInit, AfterViewInit {
   private readonly pDraggable: Draggable;
   private readonly pDroppable: Droppable;
 
-  @HostBinding('attr.pDraggable') get draggable() {
-    return this.pDraggable;
-  }
-
-  @HostBinding('attr.pDraggable') get draggable() {
-    return this.pDraggable;
-  }
-
   @HostListener('dragstart', ['$event']) onDragStart(event) {
     this.pDraggable.dragStart(event);
   }
@@ -36,7 +28,17 @@ export class SortableListItemDirective implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.pDraggable.ngAfterViewInit();
-    this.pDraggable.onDragStart.subscribe(e => console.log('Strart drag', e));
+    this.pDraggable.onDragStart.subscribe((dragEvent: DragEvent) => this.dragStart(dragEvent));
     this.pDroppable.onDragEnter.subscribe(e => console.log('Drag enter', e));
   }
+
+  private dragStart(dragEvent: DragEvent): void {
+    const dragElement: any = dragEvent.target;
+    const allElements = dragElement.parentNode.children;
+    console.log(this.findIndex(allElements, dragElement));
+  }
+
+  private findIndex(collection, node) {
+    return Array.prototype.indexOf.call(collection, node);
+  };
 }

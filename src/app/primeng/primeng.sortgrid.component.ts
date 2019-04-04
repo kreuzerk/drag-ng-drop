@@ -30,7 +30,9 @@ export class PrimengSortgridComponent implements OnInit {
 
     isCmdKeyPressed$.pipe(
       switchMap((pressed) => pressed ? this.dragItemClicked$ : NEVER)
-    ).subscribe(e => console.log(e));
+    ).subscribe((selectedElement: ElementRef) => {
+      selectedElement.nativeElement.firstChild.classList.add('selected');
+    });
 
   }
 

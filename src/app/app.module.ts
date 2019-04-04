@@ -44,7 +44,7 @@ import {SortableListComponent} from './sortable-list/sortable-list.component';
       {path: 'dragulaSortGrid', component: DragulaComponent},
       {path: 'primengSortGrid', component: PrimengSortgridComponent},
       {path: 'sortableList', component: SortableListDemoComponent},
-      {path: '', redirectTo: 'sortableList', pathMatch: 'full'}
+      {path: '', redirectTo: 'primengSortGrid', pathMatch: 'full'}
     ])
   ],
   providers: [],

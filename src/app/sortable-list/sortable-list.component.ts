@@ -6,7 +6,7 @@ import {Component, Input, TemplateRef} from '@angular/core';
 })
 export class SortableListComponent {
 
-  @Input() dragableItem: TemplateRef;
+  @Input() dragableItem: TemplateRef<any>;
   @Input() items: any[];
 
   private dragIndex: number;

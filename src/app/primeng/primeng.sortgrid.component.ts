@@ -54,11 +54,8 @@ export class PrimengSortgridComponent implements OnInit {
   }
 
   private getReferenceElement(collection, dragIndex: number, hoverIndex: number): Node | null {
-    if (hoverIndex + 1 === this.draggableContainers._results.length) {
-      return null;
-    }
-    const elementRefIndex = dragIndex < hoverIndex ? hoverIndex + 1 : hoverIndex;
-    return collection[elementRefIndex];
+    const dropElement = collection[hoverIndex];
+    return dragIndex < hoverIndex ? dropElement.nextSibling : dropElement;
   }
 
   private indexOf(collection, node: ElementRef): number {

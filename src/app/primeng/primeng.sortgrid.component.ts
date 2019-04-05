@@ -11,9 +11,9 @@ export class PrimengSortgridComponent implements OnInit {
   @ViewChildren('draggableContainer') draggableContainers;
 
   public items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   private dragElement: any;
   private dragIndex: number;
-  private cmdKeypress$: Observable<any>;
   private COMMAND_KEY = 91;
   private dragItemClicked$ = new Subject<ElementRef>();
 
@@ -41,17 +41,11 @@ export class PrimengSortgridComponent implements OnInit {
   }
 
   dragEnter(event, dropElement: any): void {
-
     const hoverIndex = this.indexOf(this.dragElement.parentNode.children, dropElement);
     if (hoverIndex === this.dragIndex) {
       return;
     }
-
-    console.log('Im Dragenter: hoverIndex', hoverIndex);
-    console.log('Im Dragenter: dragIndex', this.dragIndex);
-
     const el = this.getReferenceElement(this.dragElement.parentNode.children, this.dragIndex, hoverIndex);
-
     dropElement.parentNode.insertBefore(this.dragElement, el);
     this.dragIndex = this.indexOf(this.dragElement.parentNode.children, this.dragElement);
   }
@@ -60,7 +54,6 @@ export class PrimengSortgridComponent implements OnInit {
     if (hoverIndex + 1 === this.draggableContainers._results.length) {
       return null;
     }
-
     const elementRefIndex = dragIndex < hoverIndex ? hoverIndex + 1 : hoverIndex;
     return collection[elementRefIndex];
   }

@@ -11,9 +11,8 @@ export class PrimengSortgridComponent implements OnInit {
   @ViewChildren('draggableContainer') draggableContainers;
 
   public items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  private dragIndex: number;
   private dragElement: any;
-  private placeHolderPosition;
+  private dragIndex: number;
   private cmdKeypress$: Observable<any>;
   private COMMAND_KEY = 91;
   private dragItemClicked$ = new Subject<ElementRef>();
@@ -36,31 +35,34 @@ export class PrimengSortgridComponent implements OnInit {
 
   }
 
-  dragStart(event, index): void {
-    this.dragIndex = index;
-    this.dragElement = this.draggableContainers._results[this.dragIndex];
-    this.placeHolderPosition = index;
+  dragStart(event, container): void {
+    this.dragIndex = this.indexOf(container.parentNode.children, container);
+    this.dragElement = container;
   }
 
-  dragEnter(event, hoverIndex: number): void {
+  dragEnter(event, dropElement: any): void {
 
-    const dragIndex = this.indexOf(this.dragElement.nativeElement.parentNode.children, this.dragElement.nativeElement);
-    console.log('Im Dragenter: hoverIndex', hoverIndex);
-    console.log('Im Dragenter: dragIndex', dragIndex);
-
+    const hoverIndex = this.indexOf(this.dragElement.parentNode.children, dropElement);
     if (hoverIndex === this.dragIndex) {
       return;
     }
 
-    const dropElement = this.draggableContainers._results[hoverIndex];
-    const el = this.getReferenceElement(dragIndex, hoverIndex);
+    console.log('Im Dragenter: hoverIndex', hoverIndex);
+    console.log('Im Dragenter: dragIndex', this.dragIndex);
 
-    dropElement.nativeElement.parentNode.insertBefore(this.dragElement.nativeElement, el.nativeElement);
+    const el = this.getReferenceElement(this.dragElement.parentNode.children, this.dragIndex, hoverIndex);
+
+    dropElement.parentNode.insertBefore(this.dragElement, el);
+    this.dragIndex = this.indexOf(this.dragElement.parentNode.children, this.dragElement);
   }
 
-  private getReferenceElement(dragIndex: number, hoverIndex: number): ElementRef {
+  private getReferenceElement(collection, dragIndex: number, hoverIndex: number): Node | null {
+    if (hoverIndex + 1 === this.draggableContainers._results.length) {
+      return null;
+    }
+
     const elementRefIndex = dragIndex < hoverIndex ? hoverIndex + 1 : hoverIndex;
-    return this.draggableContainers._results[elementRefIndex];
+    return collection[elementRefIndex];
   }
 
   private indexOf(collection, node: ElementRef): number {

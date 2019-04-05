@@ -12,10 +12,11 @@ export class PrimengSortgridComponent implements OnInit {
 
   public items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  private dragElement: any;
+  private dragElements: any[];
   private dragIndex: number;
   private COMMAND_KEY = 91;
   private dragItemClicked$ = new Subject<ElementRef>();
+  private selectedElements: any[] = [];
 
   ngOnInit(): void {
     // TODO Remove deprcated keyCode. See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
@@ -24,20 +25,19 @@ export class PrimengSortgridComponent implements OnInit {
       mapTo(true)
     );
     const keyup = fromEvent(window, 'keyup').pipe(mapTo(false));
-
     const isCmdKeyPressed$ = merge(cmdKeyDown, keyup);
-
     isCmdKeyPressed$.pipe(
       switchMap((pressed) => pressed ? this.dragItemClicked$ : NEVER)
     ).subscribe((selectedElement: ElementRef) => {
       selectedElement.nativeElement.firstChild.classList.add('selected');
+      this.selectedElements.push(selectedElement.nativeElement);
     });
 
   }
 
   dragStart(event, container): void {
     this.dragIndex = this.indexOf(container.parentNode.children, container);
-    this.dragElement = container;
+    this.dragElements = this.selectedElements.length === 0 ? [container] : this.selectedElements;
   }
 
   dragEnter(event, dropElement: any): void {
@@ -49,8 +49,10 @@ export class PrimengSortgridComponent implements OnInit {
       return;
     }
     const el = this.getReferenceElement(allElements, this.dragIndex, hoverIndex);
-    parent.insertBefore(this.dragElement, el);
-    this.dragIndex = this.indexOf(allElements, this.dragElement);
+    this.dragElements.forEach(dragElement => {
+      parent.insertBefore(dragElement, el);
+    });
+    this.dragIndex = this.indexOf(allElements, this.dragElements[0]);
   }
 
   private getReferenceElement(collection, dragIndex: number, hoverIndex: number): Node | null {

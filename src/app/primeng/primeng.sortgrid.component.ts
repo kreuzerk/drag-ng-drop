@@ -12,7 +12,7 @@ export class PrimengSortgridComponent implements OnInit {
 
   public items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   private dragIndex: number;
-  private dragItem: number;
+  private dragElement: any;
   private placeHolderPosition;
   private cmdKeypress$: Observable<any>;
   private COMMAND_KEY = 91;
@@ -38,24 +38,33 @@ export class PrimengSortgridComponent implements OnInit {
 
   dragStart(event, index): void {
     this.dragIndex = index;
-    this.dragItem = this.items[this.dragIndex];
+    this.dragElement = this.draggableContainers._results[this.dragIndex];
     this.placeHolderPosition = index;
   }
 
   dragEnter(event, hoverIndex: number): void {
-    this.insertItem(hoverIndex, hoverIndex < this.placeHolderPosition);
-    this.removeItem(this.placeHolderPosition, hoverIndex > this.placeHolderPosition);
-    this.placeHolderPosition = hoverIndex;
+
+    const dragIndex = this.indexOf(this.dragElement.nativeElement.parentNode.children, this.dragElement.nativeElement);
+    console.log('Im Dragenter: hoverIndex', hoverIndex);
+    console.log('Im Dragenter: dragIndex', dragIndex);
+
+    if (hoverIndex === this.dragIndex) {
+      return;
+    }
+
+    const dropElement = this.draggableContainers._results[hoverIndex];
+    const el = this.getReferenceElement(dragIndex, hoverIndex);
+
+    dropElement.nativeElement.parentNode.insertBefore(this.dragElement.nativeElement, el.nativeElement);
   }
 
-  private removeItem(index: number, after: boolean) {
-    const position = after ? index : index + 1;
-    this.items.splice(position, 1);
+  private getReferenceElement(dragIndex: number, hoverIndex: number): ElementRef {
+    const elementRefIndex = dragIndex < hoverIndex ? hoverIndex + 1 : hoverIndex;
+    return this.draggableContainers._results[elementRefIndex];
   }
 
-  private insertItem(index: number, before) {
-    const position = before ? index : index + 1;
-    this.items.splice(position, 0, this.dragItem);
+  private indexOf(collection, node: ElementRef): number {
+    return Array.prototype.indexOf.call(collection, node);
   }
 
   itemClicked(index): void {

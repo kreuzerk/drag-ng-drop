@@ -41,13 +41,16 @@ export class PrimengSortgridComponent implements OnInit {
   }
 
   dragEnter(event, dropElement: any): void {
-    const hoverIndex = this.indexOf(this.dragElement.parentNode.children, dropElement);
+    const parent = dropElement.parentNode;
+    const allElements = parent.children;
+
+    const hoverIndex = this.indexOf(allElements, dropElement);
     if (hoverIndex === this.dragIndex) {
       return;
     }
-    const el = this.getReferenceElement(this.dragElement.parentNode.children, this.dragIndex, hoverIndex);
-    dropElement.parentNode.insertBefore(this.dragElement, el);
-    this.dragIndex = this.indexOf(this.dragElement.parentNode.children, this.dragElement);
+    const el = this.getReferenceElement(allElements, this.dragIndex, hoverIndex);
+    parent.insertBefore(this.dragElement, el);
+    this.dragIndex = this.indexOf(allElements, this.dragElement);
   }
 
   private getReferenceElement(collection, dragIndex: number, hoverIndex: number): Node | null {

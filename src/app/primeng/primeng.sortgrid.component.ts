@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChildren} from '@angular/core';
-import {fromEvent, merge, NEVER, Observable, Subject} from 'rxjs';
+import {fromEvent, merge, NEVER, Observable, Subject, timer} from 'rxjs';
 import {filter, mapTo, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -37,7 +37,18 @@ export class PrimengSortgridComponent implements OnInit {
 
   dragStart(event, container): void {
     this.dragIndex = this.indexOf(container.parentNode.children, container);
-    this.dragElements = this.selectedElements.length === 0 ? [container] : this.selectedElements;
+
+    if (this.selectedElements.length > 0) {
+      this.removeSelectedClasses();
+      this.dragElements = this.selectedElements;
+    } else {
+      this.dragElements = [container];
+    }
+
+  }
+
+  private removeSelectedClasses(): void {
+    this.selectedElements.forEach(element => element.firstChild.classList.remove('selected'));
   }
 
   dragEnter(event, dropElement: any): void {
@@ -50,9 +61,25 @@ export class PrimengSortgridComponent implements OnInit {
     }
     const el = this.getReferenceElement(allElements, this.dragIndex, hoverIndex);
     this.dragElements.forEach(dragElement => {
-      parent.insertBefore(dragElement, el);
+      const insertedNode = parent.insertBefore(dragElement, el);
+      insertedNode.firstChild.classList.add('placeholder');
     });
     this.dragIndex = this.indexOf(allElements, this.dragElements[0]);
+  }
+
+  dropped(event, dropElement: any): void {
+    if(this.selectedElements.length > 0){
+    this.selectedElements.forEach(el => {
+      el.firstChild.classList.remove('placeholder');
+      el.firstChild.classList.add('dropped');
+      timer(500).subscribe(() => el.firstChild.classList.remove('dropped'));
+    });
+    this.selectedElements = [];
+    } else {
+      dropElement.firstChild.classList.remove('placeholder');
+      dropElement.firstChild.classList.add('dropped');
+      timer(500).subscribe(() => dropElement.firstChild.classList.remove('dropped'));
+    }
   }
 
   private getReferenceElement(collection, dragIndex: number, hoverIndex: number): Node | null {

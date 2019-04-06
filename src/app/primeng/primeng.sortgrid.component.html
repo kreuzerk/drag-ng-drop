@@ -4,7 +4,9 @@
     <div *ngFor="let item of items; let i = index" #draggableContainer pDraggable pDroppable
          (click)="itemClicked(i)"
          (onDragStart)="dragStart($event, draggableContainer)"
-         (onDragEnter)="dragEnter($event, draggableContainer)">
+         (onDragEnter)="dragEnter($event, draggableContainer)"
+         (onDrop)="dropped($event, draggableContainer)"
+    >
       <div class="example-box">{{item}}</div>
   </div>
 </div>
